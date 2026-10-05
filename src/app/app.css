@@ -1,0 +1,15 @@
+.layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+app-header,
+app-footer {
+  grid-column: 1 / -1;
+}
+
+.content {
+  padding: var(--sp-lg);
+}
