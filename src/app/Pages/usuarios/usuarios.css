@@ -1,0 +1,260 @@
+* {
+  box-sizing: border-box;
+}
+
+.usuarios {
+  padding: 30px;
+  background: #f7f7f7;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+
+/* ENCABEZADO */
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.encabezado h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.encabezado p {
+  margin: 6px 0 0;
+  color: #777;
+}
+
+
+/* BOTONES */
+
+.btn {
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-principal {
+  background: #222;
+  color: white;
+}
+
+.btn-buscar {
+  background: #555;
+  color: white;
+}
+
+.btn-cancelar {
+  background: #eee;
+}
+
+.btn-guardar {
+  background: #222;
+  color: white;
+}
+
+
+/* BUSCADOR */
+
+.barra {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.barra input {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+
+/* TABLA */
+
+.tabla-contenedor {
+  background: white;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 30px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #fafafa;
+  font-size: 14px;
+}
+
+td {
+  font-size: 14px;
+}
+
+
+/* ROLES */
+
+.rol {
+  padding: 5px 9px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.gerente {
+  background: #e8e8e8;
+}
+
+.vendedor {
+  background: #eeeeee;
+}
+
+.auxiliar {
+  background: #f2f2f2;
+}
+
+
+/* ESTADOS */
+
+.estado {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.activo {
+  color: #2d7a45;
+}
+
+.inactivo {
+  color: #999;
+}
+
+
+/* ACCIONES */
+
+.acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-editar,
+.btn-inactivar,
+.btn-activar {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-editar {
+  color: #333;
+}
+
+.btn-inactivar {
+  color: #a33;
+}
+
+.btn-activar {
+  color: #287542;
+}
+
+
+/* FORMULARIO */
+
+.formulario {
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+}
+
+.formulario h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+
+/* CAMPOS */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.campo label {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.campo input,
+.campo select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+.campo input:focus,
+.campo select:focus {
+  border-color: #555;
+}
+
+
+/* ACCIONES DEL FORMULARIO */
+
+.form-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+
+  .usuarios {
+    padding: 20px;
+  }
+
+  .encabezado {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .barra input {
+    width: 100%;
+  }
+
+  .barra {
+    flex-direction: column;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

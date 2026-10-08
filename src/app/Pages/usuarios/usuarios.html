@@ -1,1 +1,203 @@
-<p>usuarios works!</p>
+<div class="usuarios">
+
+  <div class="encabezado">
+    <div>
+      <h1>Gestión de usuarios</h1>
+      <p>Administra los usuarios del sistema</p>
+    </div>
+
+    <button class="btn btn-principal">
+      + Nuevo usuario
+    </button>
+  </div>
+
+
+  <!-- BUSCAR -->
+  <div class="barra">
+    <input
+      type="text"
+      placeholder="Buscar por número de documento..."
+    />
+
+    <button class="btn btn-buscar">
+      Buscar
+    </button>
+  </div>
+
+
+  <!-- TABLA -->
+  <div class="tabla-contenedor">
+
+    <table>
+
+      <thead>
+      <tr>
+        <th>Documento</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <tr>
+        <td>1000123456</td>
+        <td>Laura Gómez</td>
+        <td>laura@gmail.com</td>
+
+        <td>
+            <span class="rol gerente">
+              Gerente
+            </span>
+        </td>
+
+        <td>
+            <span class="estado activo">
+              Activo
+            </span>
+        </td>
+
+        <td class="acciones">
+          <button class="btn-editar">
+            Editar
+          </button>
+
+          <button class="btn-inactivar">
+            Inactivar
+          </button>
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>1000234567</td>
+        <td>Daniela Pérez</td>
+        <td>daniela@gmail.com</td>
+
+        <td>
+            <span class="rol vendedor">
+              Vendedor
+            </span>
+        </td>
+
+        <td>
+            <span class="estado activo">
+              Activo
+            </span>
+        </td>
+
+        <td class="acciones">
+          <button class="btn-editar">
+            Editar
+          </button>
+
+          <button class="btn-inactivar">
+            Inactivar
+          </button>
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>1000345678</td>
+        <td>Mariana López</td>
+        <td>mariana@gmail.com</td>
+
+        <td>
+            <span class="rol auxiliar">
+              Auxiliar
+            </span>
+        </td>
+
+        <td>
+            <span class="estado inactivo">
+              Inactivo
+            </span>
+        </td>
+
+        <td class="acciones">
+          <button class="btn-editar">
+            Editar
+          </button>
+
+          <button class="btn-activar">
+            Activar
+          </button>
+        </td>
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- FORMULARIO -->
+  <div class="formulario">
+
+    <h2>Nuevo usuario</h2>
+
+    <div class="form-grid">
+
+      <div class="campo">
+        <label>Número de documento</label>
+        <input
+          type="text"
+          placeholder="Ej. 1000123456"
+        />
+      </div>
+
+      <div class="campo">
+        <label>Nombres</label>
+        <input
+          type="text"
+          placeholder="Ej. Laura"
+        />
+      </div>
+
+      <div class="campo">
+        <label>Apellidos</label>
+        <input
+          type="text"
+          placeholder="Ej. Gómez"
+        />
+      </div>
+
+      <div class="campo">
+        <label>Correo</label>
+        <input
+          type="email"
+          placeholder="Ej. laura@gmail.com"
+        />
+      </div>
+
+      <div class="campo">
+        <label>Rol</label>
+
+        <select>
+          <option value="">Seleccionar rol</option>
+          <option>Gerente</option>
+          <option>Auxiliar Administrativo</option>
+          <option>Vendedor</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="form-acciones">
+      <button class="btn btn-cancelar">
+        Cancelar
+      </button>
+
+      <button class="btn btn-guardar">
+        Guardar usuario
+      </button>
+    </div>
+
+  </div>
+
+</div>

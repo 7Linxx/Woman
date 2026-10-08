@@ -1,1 +1,256 @@
-<p>facturacion works!</p>
+<div class="facturacion">
+
+  <!-- ENCABEZADO -->
+  <div class="encabezado">
+    <div>
+      <h1>Facturación</h1>
+      <p>Gestiona las facturas de la tienda</p>
+    </div>
+
+    <button class="btn btn-principal">
+      + Nueva factura
+    </button>
+  </div>
+
+
+  <!-- BUSCADOR / FILTROS -->
+  <div class="filtros">
+
+    <input
+      type="text"
+      placeholder="Buscar por cliente..."
+    />
+
+    <input
+      type="date"
+    />
+
+    <select>
+      <option value="">Todos los estados</option>
+      <option>Pagada</option>
+      <option>Pendiente</option>
+    </select>
+
+    <button class="btn btn-buscar">
+      Buscar
+    </button>
+
+  </div>
+
+
+  <!-- TABLA DE FACTURAS -->
+  <div class="tabla-contenedor">
+
+    <table>
+
+      <thead>
+      <tr>
+        <th>Factura</th>
+        <th>Cliente</th>
+        <th>Fecha</th>
+        <th>Vendedor</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <tr>
+        <td>FAC-001</td>
+        <td>Laura Gómez</td>
+        <td>07/10/2026</td>
+        <td>Daniela Pérez</td>
+        <td>$150.000</td>
+
+        <td>
+            <span class="estado pagada">
+              Pagada
+            </span>
+        </td>
+
+        <td class="acciones">
+          <button class="btn-ver">
+            Ver
+          </button>
+
+          <button class="btn-pdf">
+            PDF
+          </button>
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>FAC-002</td>
+        <td>Mariana López</td>
+        <td>07/10/2026</td>
+        <td>Laura Gómez</td>
+        <td>$85.000</td>
+
+        <td>
+            <span class="estado pendiente">
+              Pendiente
+            </span>
+        </td>
+
+        <td class="acciones">
+          <button class="btn-ver">
+            Ver
+          </button>
+
+          <button class="btn-pdf">
+            PDF
+          </button>
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>FAC-003</td>
+        <td>Sofía Martínez</td>
+        <td>06/10/2026</td>
+        <td>Daniela Pérez</td>
+        <td>$230.000</td>
+
+        <td>
+            <span class="estado pagada">
+              Pagada
+            </span>
+        </td>
+
+        <td class="acciones">
+          <button class="btn-ver">
+            Ver
+          </button>
+
+          <button class="btn-pdf">
+            PDF
+          </button>
+        </td>
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- NUEVA FACTURA -->
+  <div class="formulario">
+
+    <h2>Nueva factura</h2>
+
+    <!-- CLIENTE -->
+    <div class="form-grid">
+
+      <div class="campo">
+        <label>Cliente</label>
+
+        <input
+          type="text"
+          placeholder="Nombre del cliente"
+        />
+      </div>
+
+      <div class="campo">
+        <label>Vendedor</label>
+
+        <select>
+          <option>Seleccionar vendedor</option>
+          <option>Laura Gómez</option>
+          <option>Daniela Pérez</option>
+        </select>
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCTO -->
+    <h3>Productos</h3>
+
+    <div class="producto">
+
+      <select>
+        <option>Seleccionar producto</option>
+        <option>Bolso negro</option>
+        <option>Bolso rojo</option>
+        <option>Billetera</option>
+      </select>
+
+      <input
+        type="number"
+        placeholder="Cantidad"
+        min="1"
+      />
+
+      <input
+        type="text"
+        placeholder="Precio"
+      />
+
+      <button class="btn btn-agregar">
+        Agregar
+      </button>
+
+    </div>
+
+
+    <!-- PRODUCTOS AGREGADOS -->
+    <table class="tabla-productos">
+
+      <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Total</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <tr>
+        <td>Bolso negro</td>
+        <td>1</td>
+        <td>$120.000</td>
+        <td>$120.000</td>
+      </tr>
+
+      <tr>
+        <td>Billetera</td>
+        <td>1</td>
+        <td>$30.000</td>
+        <td>$30.000</td>
+      </tr>
+
+      </tbody>
+
+    </table>
+
+
+    <!-- TOTAL -->
+    <div class="total">
+      <strong>Total:</strong>
+      <span>$150.000</span>
+    </div>
+
+
+    <!-- BOTONES -->
+    <div class="form-acciones">
+
+      <button class="btn btn-cancelar">
+        Cancelar
+      </button>
+
+      <button class="btn btn-guardar">
+        Generar factura
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
