@@ -4,13 +4,10 @@
 
 .facturacion {
   padding: 30px;
-  background: #f7f7f7;
+  background-color: var(--color-lavender-blush);
   min-height: 100vh;
-  font-family: Arial, sans-serif;
+  border-radius: 12px;
 }
-
-
-/* ENCABEZADO */
 
 .encabezado {
   display: flex;
@@ -22,15 +19,16 @@
 .encabezado h1 {
   margin: 0;
   font-size: 28px;
+  color: var(--color-light-carmine-pink);
+
 }
 
 .encabezado p {
   margin: 6px 0 0;
-  color: #777;
+  color: var(--color-romantic-pink);
 }
 
 
-/* BOTONES */
 
 .btn {
   border: none;

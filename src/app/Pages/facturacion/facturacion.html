@@ -1,48 +1,29 @@
 <div class="facturacion">
 
-  <!-- ENCABEZADO -->
   <div class="encabezado">
     <div>
       <h1>Facturación</h1>
       <p>Gestiona las facturas de la tienda</p>
     </div>
 
-    <button class="btn btn-principal">
-      + Nueva factura
-    </button>
+    <button class="boton principal" type="button">+ Nueva factura</button>
   </div>
 
-
-  <!-- BUSCADOR / FILTROS -->
   <div class="filtros">
+    <input type="text" placeholder="Buscar por cliente..." aria-label="Buscar por cliente" />
+    <input type="date" aria-label="Fecha" />
 
-    <input
-      type="text"
-      placeholder="Buscar por cliente..."
-    />
-
-    <input
-      type="date"
-    />
-
-    <select>
+    <select aria-label="Estado">
       <option value="">Todos los estados</option>
       <option>Pagada</option>
       <option>Pendiente</option>
     </select>
 
-    <button class="btn btn-buscar">
-      Buscar
-    </button>
-
+    <button class="boton secundario" type="button">Buscar</button>
   </div>
 
-
-  <!-- TABLA DE FACTURAS -->
-  <div class="tabla-contenedor">
-
+  <div class="tabla">
     <table>
-
       <thead>
       <tr>
         <th>Factura</th>
@@ -56,31 +37,18 @@
       </thead>
 
       <tbody>
-
       <tr>
         <td>FAC-001</td>
         <td>Laura Gómez</td>
         <td>07/10/2026</td>
         <td>Daniela Pérez</td>
         <td>$150.000</td>
-
-        <td>
-            <span class="estado pagada">
-              Pagada
-            </span>
-        </td>
-
+        <td><span class="estado pagada">Pagada</span></td>
         <td class="acciones">
-          <button class="btn-ver">
-            Ver
-          </button>
-
-          <button class="btn-pdf">
-            PDF
-          </button>
+          <button class="ver" type="button">Ver</button>
+          <button class="pdf" type="button">PDF</button>
         </td>
       </tr>
-
 
       <tr>
         <td>FAC-002</td>
@@ -88,24 +56,12 @@
         <td>07/10/2026</td>
         <td>Laura Gómez</td>
         <td>$85.000</td>
-
-        <td>
-            <span class="estado pendiente">
-              Pendiente
-            </span>
-        </td>
-
+        <td><span class="estado pendiente">Pendiente</span></td>
         <td class="acciones">
-          <button class="btn-ver">
-            Ver
-          </button>
-
-          <button class="btn-pdf">
-            PDF
-          </button>
+          <button class="ver" type="button">Ver</button>
+          <button class="pdf" type="button">PDF</button>
         </td>
       </tr>
-
 
       <tr>
         <td>FAC-003</td>
@@ -113,144 +69,89 @@
         <td>06/10/2026</td>
         <td>Daniela Pérez</td>
         <td>$230.000</td>
-
-        <td>
-            <span class="estado pagada">
-              Pagada
-            </span>
-        </td>
-
+        <td><span class="estado pagada">Pagada</span></td>
         <td class="acciones">
-          <button class="btn-ver">
-            Ver
-          </button>
-
-          <button class="btn-pdf">
-            PDF
-          </button>
+          <button class="ver" type="button">Ver</button>
+          <button class="pdf" type="button">PDF</button>
         </td>
       </tr>
-
       </tbody>
-
     </table>
-
   </div>
 
-
-  <!-- NUEVA FACTURA -->
   <div class="formulario">
-
     <h2>Nueva factura</h2>
 
-    <!-- CLIENTE -->
-    <div class="form-grid">
-
+    <div class="datos">
       <div class="campo">
-        <label>Cliente</label>
-
-        <input
-          type="text"
-          placeholder="Nombre del cliente"
-        />
+        <label for="cliente">Cliente</label>
+        <input id="cliente" type="text" placeholder="Nombre del cliente" />
       </div>
 
       <div class="campo">
-        <label>Vendedor</label>
-
-        <select>
+        <label for="vendedor">Vendedor</label>
+        <select id="vendedor">
           <option>Seleccionar vendedor</option>
           <option>Laura Gómez</option>
           <option>Daniela Pérez</option>
         </select>
       </div>
-
     </div>
 
-
-    <!-- PRODUCTO -->
     <h3>Productos</h3>
 
-    <div class="producto">
-
-      <select>
+    <div class="agregar-producto">
+      <select aria-label="Producto">
         <option>Seleccionar producto</option>
         <option>Bolso negro</option>
         <option>Bolso rojo</option>
         <option>Billetera</option>
       </select>
 
-      <input
-        type="number"
-        placeholder="Cantidad"
-        min="1"
-      />
+      <input type="number" placeholder="Cantidad" min="1" aria-label="Cantidad" />
+      <input type="text" placeholder="Precio" aria-label="Precio" />
 
-      <input
-        type="text"
-        placeholder="Precio"
-      />
-
-      <button class="btn btn-agregar">
-        Agregar
-      </button>
-
+      <button class="boton secundario" type="button">Agregar</button>
     </div>
 
+    <div class="tabla productos">
+      <table>
+        <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Total</th>
+        </tr>
+        </thead>
 
-    <!-- PRODUCTOS AGREGADOS -->
-    <table class="tabla-productos">
+        <tbody>
+        <tr>
+          <td>Bolso negro</td>
+          <td>1</td>
+          <td>$120.000</td>
+          <td>$120.000</td>
+        </tr>
 
-      <thead>
-      <tr>
-        <th>Producto</th>
-        <th>Cantidad</th>
-        <th>Precio</th>
-        <th>Total</th>
-      </tr>
-      </thead>
+        <tr>
+          <td>Billetera</td>
+          <td>1</td>
+          <td>$30.000</td>
+          <td>$30.000</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <tbody>
-
-      <tr>
-        <td>Bolso negro</td>
-        <td>1</td>
-        <td>$120.000</td>
-        <td>$120.000</td>
-      </tr>
-
-      <tr>
-        <td>Billetera</td>
-        <td>1</td>
-        <td>$30.000</td>
-        <td>$30.000</td>
-      </tr>
-
-      </tbody>
-
-    </table>
-
-
-    <!-- TOTAL -->
     <div class="total">
       <strong>Total:</strong>
       <span>$150.000</span>
     </div>
 
-
-    <!-- BOTONES -->
-    <div class="form-acciones">
-
-      <button class="btn btn-cancelar">
-        Cancelar
-      </button>
-
-      <button class="btn btn-guardar">
-        Generar factura
-      </button>
-
+    <div class="botones">
+      <button class="boton cancelar" type="button">Cancelar</button>
+      <button class="boton principal" type="button">Generar factura</button>
     </div>
-
   </div>
 
 </div>
