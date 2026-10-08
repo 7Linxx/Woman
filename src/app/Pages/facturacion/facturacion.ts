@@ -1,9 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
   selector: 'app-facturacion',
-  styleUrl: './facturacion.css',
+  imports: [RouterLink],
   templateUrl: './facturacion.html',
+  styleUrl: './facturacion.css',
 })
-export class Facturacion {}
+export class Facturacion {
+  mostrandoFormulario = signal(false);
+
+  nuevaFactura() {
+    this.mostrandoFormulario.set(true);
+  }
+
+  volver() {
+    this.mostrandoFormulario.set(false);
+  }
+}

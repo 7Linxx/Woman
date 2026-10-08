@@ -1,9 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
   selector: 'app-usuarios',
-  styleUrl: './usuarios.css',
+  imports: [RouterLink],
   templateUrl: './usuarios.html',
+  styleUrl: './usuarios.css',
 })
-export class Usuarios {}
+export class Usuarios {
+  mostrandoFormulario = signal(false);
+
+  nuevoUsuario() {
+    this.mostrandoFormulario.set(true);
+  }
+
+  volver() {
+    this.mostrandoFormulario.set(false);
+  }
+}
