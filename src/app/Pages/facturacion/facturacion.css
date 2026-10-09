@@ -209,7 +209,9 @@ td:first-child {
 }
 
 .ver,
-.pdf {
+.pdf,
+.editar,
+.quitar {
   padding: var(--sp-xs) var(--sp-md);
   border: 2px solid var(--color-blush);
   border-radius: var(--radius-sm);
@@ -320,6 +322,127 @@ td:first-child {
 }
 
 
+.editar {
+  color: var(--color-light-carmine-pink);
+}
+
+.editar:hover {
+  background: var(--color-rosa-pastel);
+  border-color: var(--color-girly-pink);
+}
+
+.quitar {
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.quitar:hover {
+  background: var(--color-error);
+  color: var(--color-blanco);
+}
+
+.vacio {
+  padding: var(--sp-xl);
+  text-align: center;
+  color: var(--color-romantic-pink);
+}
+
+.peligro {
+  background: #FBE1E6;
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.peligro:hover {
+  background: var(--color-error);
+  color: var(--color-blanco);
+}
+
+
+.fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-md);
+  background: rgba(70, 20, 40, 0.45);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+
+.modal {
+  width: 100%;
+  max-width: 760px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: var(--sp-lg);
+  background: var(--color-blanco);
+  border: 2px solid var(--color-girly-pink);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-modal);
+  animation: scaleIn 0.25s var(--ease-out);
+}
+
+.modal-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-md);
+  margin-bottom: var(--sp-md);
+}
+
+.modal-encabezado h2 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-sweet-cherry);
+}
+
+.cerrar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  color: var(--color-light-carmine-pink);
+  transition: background var(--transition-rapida);
+}
+
+.cerrar:hover {
+  background: var(--color-rosa-pastel);
+}
+
+.modal h3 {
+  margin: var(--sp-lg) 0 var(--sp-md);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-light-carmine-pink);
+}
+
+.datos.tres {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.productos input {
+  width: 80px;
+  padding: var(--sp-xs) var(--sp-sm);
+}
+
+.productos {
+  margin-bottom: var(--sp-md);
+}
+
+.separados {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.grupo {
+  display: flex;
+  gap: var(--sp-sm);
+}
+
+
 .pie {
   display: flex;
   justify-content: flex-end;
@@ -337,8 +460,14 @@ td:first-child {
   }
 
   .datos,
+  .datos.tres,
   .agregar-producto {
     grid-template-columns: 1fr;
+  }
+
+  .separados,
+  .grupo {
+    flex-direction: column-reverse;
   }
 
   .botones {

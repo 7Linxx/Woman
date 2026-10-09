@@ -21,38 +21,42 @@
       <div class="datos">
         <div class="campo">
           <label for="documento">Número de documento</label>
-          <input id="documento" type="text" placeholder="Ej. 1000123456" />
+          <input id="documento" type="text" placeholder="Ej. 1000123456" [(ngModel)]="nuevo.documento" />
         </div>
 
         <div class="campo">
           <label for="nombres">Nombres</label>
-          <input id="nombres" type="text" placeholder="Ej. Laura" />
+          <input id="nombres" type="text" placeholder="Ej. Laura" [(ngModel)]="nuevo.nombres" />
         </div>
 
         <div class="campo">
           <label for="apellidos">Apellidos</label>
-          <input id="apellidos" type="text" placeholder="Ej. Gómez" />
+          <input id="apellidos" type="text" placeholder="Ej. Gómez" [(ngModel)]="nuevo.apellidos" />
         </div>
 
         <div class="campo">
           <label for="correo">Correo</label>
-          <input id="correo" type="email" placeholder="Ej. laura@gmail.com" />
+          <input id="correo" type="email" placeholder="Ej. laura@gmail.com" [(ngModel)]="nuevo.correo" />
         </div>
 
         <div class="campo">
           <label for="rol">Rol</label>
-          <select id="rol">
+          <select id="rol" [(ngModel)]="nuevo.rol">
             <option value="">Seleccionar rol</option>
-            <option>Gerente</option>
-            <option>Auxiliar Administrativo</option>
-            <option>Vendedor</option>
+            @for (r of roles; track r) {
+              <option [value]="r">{{ r }}</option>
+            }
           </select>
         </div>
       </div>
 
+      @if (error()) {
+        <p class="error" role="alert">{{ error() }}</p>
+      }
+
       <div class="botones">
         <button class="boton cancelar" type="button" (click)="volver()">Cancelar</button>
-        <button class="boton principal" type="button">Guardar usuario</button>
+        <button class="boton principal" type="button" (click)="crearUsuario()">Guardar usuario</button>
       </div>
     </div>
 
@@ -77,41 +81,35 @@
         </thead>
 
         <tbody>
-        <tr>
-          <td>1000123456</td>
-          <td>Laura Gómez</td>
-          <td>laura@gmail.com</td>
-          <td><span class="rol gerente">Gerente</span></td>
-          <td><span class="estado activo">Activo</span></td>
-          <td class="acciones">
-            <button class="editar" type="button">Editar</button>
-            <button class="inactivar" type="button">Inactivar</button>
-          </td>
-        </tr>
-
-        <tr>
-          <td>1000234567</td>
-          <td>Daniela Pérez</td>
-          <td>daniela@gmail.com</td>
-          <td><span class="rol vendedor">Vendedor</span></td>
-          <td><span class="estado activo">Activo</span></td>
-          <td class="acciones">
-            <button class="editar" type="button">Editar</button>
-            <button class="inactivar" type="button">Inactivar</button>
-          </td>
-        </tr>
-
-        <tr>
-          <td>1000345678</td>
-          <td>Mariana López</td>
-          <td>mariana@gmail.com</td>
-          <td><span class="rol auxiliar">Auxiliar</span></td>
-          <td><span class="estado inactivo">Inactivo</span></td>
-          <td class="acciones">
-            <button class="editar" type="button">Editar</button>
-            <button class="activar" type="button">Activar</button>
-          </td>
-        </tr>
+          @for (u of usuarios(); track u.documento) {
+            <tr>
+              <td>{{ u.documento }}</td>
+              <td>{{ u.nombres }} {{ u.apellidos }}</td>
+              <td>{{ u.correo }}</td>
+              <td>
+                <span class="rol" [class.gerente]="u.rol === 'Gerente'" [class.vendedor]="u.rol === 'Vendedor'" [class.auxiliar]="u.rol === 'Auxiliar'">
+                  {{ u.rol }}
+                </span>
+              </td>
+              <td>
+                <span class="estado" [class.activo]="u.activo" [class.inactivo]="!u.activo">
+                  {{ u.activo ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+              <td class="acciones">
+                <button class="editar" type="button" (click)="editar(u)">Editar</button>
+                @if (u.activo) {
+                  <button class="inactivar" type="button" (click)="cambiarEstado(u)">Inactivar</button>
+                } @else {
+                  <button class="activar" type="button" (click)="cambiarEstado(u)">Activar</button>
+                }
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td class="vacio" colspan="6">No hay usuarios</td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>
@@ -121,5 +119,76 @@
   <div class="pie">
     <a class="boton secundario" routerLink="/auditoria">Auditoría</a>
   </div>
+
+  @if (usuarioEditando(); as u) {
+    <div class="fondo" (click)="cerrarEditor()">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="titulo-editar"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="modal-encabezado">
+          <h2 id="titulo-editar">Editar usuario</h2>
+          <button class="cerrar" type="button" aria-label="Cerrar" (click)="cerrarEditor()">✕</button>
+        </div>
+
+        <div class="datos">
+          <div class="campo">
+            <label for="editar-documento">Número de documento</label>
+            <input id="editar-documento" type="text" [value]="u.documento" readonly />
+          </div>
+
+          <div class="campo">
+            <label for="editar-estado">Estado</label>
+            <select id="editar-estado" [(ngModel)]="u.activo">
+              <option [ngValue]="true">Activo</option>
+              <option [ngValue]="false">Inactivo</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="editar-nombres">Nombres</label>
+            <input id="editar-nombres" type="text" [(ngModel)]="u.nombres" />
+          </div>
+
+          <div class="campo">
+            <label for="editar-apellidos">Apellidos</label>
+            <input id="editar-apellidos" type="text" [(ngModel)]="u.apellidos" />
+          </div>
+
+          <div class="campo">
+            <label for="editar-correo">Correo</label>
+            <input id="editar-correo" type="email" [(ngModel)]="u.correo" />
+          </div>
+
+          <div class="campo">
+            <label for="editar-rol">Rol</label>
+            <select id="editar-rol" [(ngModel)]="u.rol">
+              @for (r of roles; track r) {
+                <option [value]="r">{{ r }}</option>
+              }
+            </select>
+          </div>
+        </div>
+
+        @if (error()) {
+          <p class="error" role="alert">{{ error() }}</p>
+        }
+
+        <div class="botones separados">
+          <button class="boton peligro" type="button" (click)="eliminarUsuario()">
+            {{ confirmandoEliminar() ? '¿Seguro? Eliminar' : 'Eliminar usuario' }}
+          </button>
+
+          <div class="grupo">
+            <button class="boton cancelar" type="button" (click)="cerrarEditor()">Cancelar</button>
+            <button class="boton principal" type="button" (click)="guardarCambios()">Guardar cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 
 </div>

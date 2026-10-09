@@ -28,8 +28,9 @@
           <label for="vendedor">Vendedor</label>
           <select id="vendedor">
             <option>Seleccionar vendedor</option>
-            <option>Laura Gómez</option>
-            <option>Daniela Pérez</option>
+            @for (v of vendedores; track v) {
+              <option>{{ v }}</option>
+            }
           </select>
         </div>
       </div>
@@ -39,9 +40,9 @@
       <div class="agregar-producto">
         <select aria-label="Producto">
           <option>Seleccionar producto</option>
-          <option>Bolso negro</option>
-          <option>Bolso rojo</option>
-          <option>Billetera</option>
+          @for (p of productosTienda; track p) {
+            <option>{{ p }}</option>
+          }
         </select>
 
         <input type="number" placeholder="Cantidad" min="1" aria-label="Cantidad" />
@@ -120,44 +121,29 @@
         </thead>
 
         <tbody>
-        <tr>
-          <td>FAC-001</td>
-          <td>Laura Gómez</td>
-          <td>07/10/2026</td>
-          <td>Daniela Pérez</td>
-          <td>$150.000</td>
-          <td><span class="estado pagada">Pagada</span></td>
-          <td class="acciones">
-            <button class="ver" type="button">Ver</button>
-            <button class="pdf" type="button">PDF</button>
-          </td>
-        </tr>
-
-        <tr>
-          <td>FAC-002</td>
-          <td>Mariana López</td>
-          <td>07/10/2026</td>
-          <td>Laura Gómez</td>
-          <td>$85.000</td>
-          <td><span class="estado pendiente">Pendiente</span></td>
-          <td class="acciones">
-            <button class="ver" type="button">Ver</button>
-            <button class="pdf" type="button">PDF</button>
-          </td>
-        </tr>
-
-        <tr>
-          <td>FAC-003</td>
-          <td>Sofía Martínez</td>
-          <td>06/10/2026</td>
-          <td>Daniela Pérez</td>
-          <td>$230.000</td>
-          <td><span class="estado pagada">Pagada</span></td>
-          <td class="acciones">
-            <button class="ver" type="button">Ver</button>
-            <button class="pdf" type="button">PDF</button>
-          </td>
-        </tr>
+          @for (f of facturas(); track f.codigo) {
+            <tr>
+              <td>{{ f.codigo }}</td>
+              <td>{{ f.cliente }}</td>
+              <td>{{ f.fecha }}</td>
+              <td>{{ f.vendedor }}</td>
+              <td>{{ dinero(total(f)) }}</td>
+              <td>
+                <span class="estado" [class.pagada]="f.estado === 'Pagada'" [class.pendiente]="f.estado === 'Pendiente'">
+                  {{ f.estado }}
+                </span>
+              </td>
+              <td class="acciones">
+                <button class="ver" type="button">Ver</button>
+                <button class="editar" type="button" (click)="editar(f)">Editar</button>
+                <button class="pdf" type="button">PDF</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td class="vacio" colspan="7">No hay facturas</td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>
@@ -167,5 +153,110 @@
   <div class="pie">
     <a class="boton secundario" routerLink="/auditoria">Auditoría</a>
   </div>
+
+  @if (facturaEditando(); as f) {
+    <div class="fondo" (click)="cerrarEditor()">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="titulo-editar"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="modal-encabezado">
+          <h2 id="titulo-editar">Editar factura {{ f.codigo }}</h2>
+          <button class="cerrar" type="button" aria-label="Cerrar" (click)="cerrarEditor()">✕</button>
+        </div>
+
+        <div class="datos tres">
+          <div class="campo">
+            <label for="editar-cliente">Cliente</label>
+            <input id="editar-cliente" type="text" [(ngModel)]="f.cliente" />
+          </div>
+
+          <div class="campo">
+            <label for="editar-vendedor">Vendedor</label>
+            <select id="editar-vendedor" [(ngModel)]="f.vendedor">
+              @for (v of vendedores; track v) {
+                <option [value]="v">{{ v }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="editar-estado">Estado</label>
+            <select id="editar-estado" [(ngModel)]="f.estado">
+              <option value="Pagada">Pagada</option>
+              <option value="Pendiente">Pendiente</option>
+            </select>
+          </div>
+        </div>
+
+        <h3>Productos</h3>
+
+        <div class="tabla productos">
+          <table>
+            <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+              @for (p of f.productos; track $index) {
+                <tr>
+                  <td>{{ p.nombre }}</td>
+                  <td><input type="number" min="1" [(ngModel)]="p.cantidad" aria-label="Cantidad" /></td>
+                  <td>{{ dinero(p.precio) }}</td>
+                  <td>{{ dinero(p.cantidad * p.precio) }}</td>
+                  <td>
+                    <button class="quitar" type="button" (click)="quitarProducto($index)">Quitar</button>
+                  </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td class="vacio" colspan="5">La factura no tiene productos</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="agregar-producto">
+          <select aria-label="Producto" [(ngModel)]="nuevoProducto.nombre">
+            <option value="">Seleccionar producto</option>
+            @for (p of productosTienda; track p) {
+              <option [value]="p">{{ p }}</option>
+            }
+          </select>
+
+          <input type="number" min="1" placeholder="Cantidad" aria-label="Cantidad" [(ngModel)]="nuevoProducto.cantidad" />
+          <input type="number" min="0" placeholder="Precio" aria-label="Precio" [(ngModel)]="nuevoProducto.precio" />
+
+          <button class="boton secundario" type="button" (click)="agregarProducto()">Agregar</button>
+        </div>
+
+        <div class="total">
+          <strong>Total:</strong>
+          <span>{{ dinero(total(f)) }}</span>
+        </div>
+
+        <div class="botones separados">
+          <button class="boton peligro" type="button" (click)="eliminarFactura()">
+            {{ confirmandoEliminar() ? '¿Seguro? Eliminar' : 'Eliminar factura' }}
+          </button>
+
+          <div class="grupo">
+            <button class="boton cancelar" type="button" (click)="cerrarEditor()">Cancelar</button>
+            <button class="boton principal" type="button" (click)="guardarCambios()">Guardar cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 
 </div>
